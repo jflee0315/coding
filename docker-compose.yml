@@ -1,0 +1,22 @@
+version: '3'
+services:
+  web:
+    build: .
+    image: "jeffrey/app"
+    container_name: jeffrey_app
+    links:
+      - jeffrey_mysql
+      - jeffrey_redis
+    depends_on:
+      - jeffrey_redis
+      - jeffrey_mysql
+    ports:
+      - "8080:8080"
+  jeffrey_redis:
+    build: db/redis
+    image: "jeffrey/redis"
+    container_name: jeffrey_redis
+  jeffrey_mysql:
+    build: db/mysql
+    image: "jeffrey/mysql"
+    container_name: jeffrey_mysql
