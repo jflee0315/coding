@@ -64,9 +64,11 @@ For integration testing, it launches embedded Redis server and MySQL server.
 
 ## Swagger
 ---
-see [authentication](#Authentication)
 visit http://localhost:8080/swagger-ui.html to see the endpoint definitions.
 
+(see [authentication](#Authentication))
+
 ## Actuator
-see [authentication](#Authentication)
 visit http://localhost:8080/actuator to see actuator endpoints.
+
+(see [authentication](#Authentication))
