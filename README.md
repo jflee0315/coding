@@ -25,7 +25,6 @@ It is a simple RESTful service for CRUD operations on a database table `employee
 - Configurations like database connection string should be passed in as parameters, instead of hard-code.
 - Make application wait for MySQL server to start.
 - Better testing code coverage.
-- Better test execution for running unit/integration tests.
 - More comment/doc in the code/swagger.
 - Cleanup dependencies.
 
@@ -65,7 +64,9 @@ For integration testing, it launches embedded Redis server and MySQL server.
 
 ## Swagger
 ---
+see [authentication](#Authentication)
 visit http://localhost:8080/swagger-ui.html to see the endpoint definitions.
 
 ## Actuator
+see [authentication](#Authentication)
 visit http://localhost:8080/actuator to see actuator endpoints.
