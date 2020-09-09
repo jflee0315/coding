@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             String username;
             String password;
             try {
-                String basicAuth = request.getHeader("Authorization").trim();
+                String basicAuth = request.getHeader(HttpHeaders.AUTHORIZATION).trim();
                 String authString = new String(Base64.getDecoder().decode(basicAuth.split(" ")[1]));
                 String[] authInfo = authString.split(":");
                 username = authInfo[0];

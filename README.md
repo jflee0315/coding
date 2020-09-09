@@ -41,7 +41,7 @@ Therefore, it may throw exception when starting up. It will recover once MySQL s
 
 If you see the application responds 500 error code, please wait a few seconds(depends on you computing resource) for mysql server to initialize/start.
 ```bash
-./mvn clean install
+./mvnw package -Dmaven.test.skip=true 
 docker-compose up --build
 ```
 
@@ -57,8 +57,11 @@ The application is using JWT for all the endpoints(including Swagger and Actuato
 
 ## Testing
 ---
-There are some unit tests(with Mock framework) and integration tests written.
-I temporarily disable testing in Maven. You can still run them in your IDE.
+Use the following command to run unit/integration test.
+For integration testing, it launches embedded Redis server and MySQL server.
+```bash
+./mvnw test
+```
 
 ## Swagger
 ---

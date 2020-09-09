@@ -7,14 +7,14 @@ import org.springframework.context.annotation.Profile;
 
 import javax.sql.DataSource;
 
-@Profile("!test")
+@Profile("test")
 @Configuration
-public class DatasourceConfig {
+public class TestDatasourceConfig {
     @Bean
     public DataSource datasource() {
         return DataSourceBuilder.create()
-                .driverClassName("com.mysql.cj.jdbc.Driver")
-                .url("jdbc:mysql://jeffrey_mysql:3306/sidecarhealth")
+                .driverClassName("org.h2.Driver")
+                .url("jdbc:h2:mem:sidecarhealth;DB_CLOSE_DELAY=-1")
                 .username("demo")
                 .password("demo")
                 .build();
