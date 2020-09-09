@@ -23,6 +23,7 @@ It is a simple RESTful service for CRUD operations on a database table `employee
 ---
 
 - Configurations like database connection string should be passed in as parameters, instead of hard-code.
+- Create Repository for Redis access.
 - Make application wait for MySQL server to start.
 - Better testing code coverage.
 - More comment/doc in the code/swagger.

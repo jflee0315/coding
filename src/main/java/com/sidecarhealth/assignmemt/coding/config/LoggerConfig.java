@@ -7,6 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+/**
+ * To @Autowired logger.
+ */
 @Configuration
 public class LoggerConfig {
     @Bean

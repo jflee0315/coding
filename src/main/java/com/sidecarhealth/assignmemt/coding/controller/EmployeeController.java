@@ -5,7 +5,10 @@ import com.sidecarhealth.assignmemt.coding.model.Employee;
 import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -48,7 +51,8 @@ public class EmployeeController {
      */
     @PostMapping
     public Employee createEmployee(@RequestBody Employee employee) {
-        employeeDao.create(employee);
+        insertEmployee(employee);
+
         return employee;
     }
 
@@ -56,7 +60,7 @@ public class EmployeeController {
     public Employee putEmployee(@RequestBody Employee employee) {
         if(!employeeDao.update(employee)) {
             logger.info("Unable to find employee with id " + employee.getId() + ". creating the employee..");
-            employeeDao.create(employee);
+            insertEmployee(employee);
         }
         return employee;
     }
@@ -64,6 +68,15 @@ public class EmployeeController {
     @DeleteMapping
     public void deleteEmployee(@RequestParam String id) {
         employeeDao.delete(id);
+    }
+
+    private void insertEmployee(Employee employee) {
+        try {
+            employeeDao.create(employee);
+        } catch(DataIntegrityViolationException e) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT, "Employee id already exists.", e);
+        }
     }
 
 }

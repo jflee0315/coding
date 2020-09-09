@@ -14,6 +14,9 @@ import java.util.concurrent.TimeUnit;
 
 import static com.sidecarhealth.assignmemt.coding.dao.redis.constant.Constant.EMPLOYEE_COUNT_KEY;
 
+/**
+ * For basic JPA operations on Employee.
+ */
 @Transactional
 @Repository
 public class EmployeeDao {
@@ -21,6 +24,8 @@ public class EmployeeDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    /* TODO: create repository for redis.
+     */
     @Autowired
     StringRedisTemplate redisTemplate;
 
@@ -64,6 +69,7 @@ public class EmployeeDao {
         if(count == null) {
             count = String.valueOf(entityManager.createQuery("SELECT count(e) FROM Employee e", Long.class).getSingleResult());
             this.redisTemplate.opsForValue().set(EMPLOYEE_COUNT_KEY, count);
+            // This is not required since we invalidate the record each time we create/delete employee.
             this.redisTemplate.expire(EMPLOYEE_COUNT_KEY, 2, TimeUnit.MINUTES);
         }
         return Integer.parseInt(count);
